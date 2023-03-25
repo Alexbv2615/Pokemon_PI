@@ -4,14 +4,14 @@ const fs = require('fs');
 const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-const sequelize = new Sequelize(
+const dataBase = new Sequelize(
    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`,
    {
       logging: false, // set to console.log to see the raw SQL queries
       native: false, // lets Sequelize know we can use pg-native for ~30% more speed
    }
 );
-const basename = path.basename(__filename);
+const basename = path.basename(__filename); // se lee el nombre de archivo actual y se guarda en la variable "basename"
 
 const modelDefiners = [];
 
@@ -27,24 +27,27 @@ fs.readdirSync(path.join(__dirname, '/models'))
       modelDefiners.push(require(path.join(__dirname, '/models', file)));
    });
 
-// Injectamos la conexion (sequelize) a todos los modelos
-modelDefiners.forEach((model) => model(sequelize));
+// Injectamos la conexion (dataBase) a todos los modelos
+modelDefiners.forEach((model) => model(dataBase));
 // Capitalizamos los nombres de los modelos ie: product => Product
-let entries = Object.entries(sequelize.models);
+let entries = Object.entries(dataBase.models); // [{model: model},...] => [[model, model],...]
 let capsEntries = entries.map((entry) => [
    entry[0][0].toUpperCase() + entry[0].slice(1),
    entry[1],
-]);
-sequelize.models = Object.fromEntries(capsEntries);
+]); // [[Model,model],...]
+dataBase.models = Object.fromEntries(capsEntries); //[{Model: model}]
 
-// En sequelize.models están todos los modelos importados como propiedades
+// En dataBase.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Pokemon } = sequelize.models;
+const { Pokemon, Type } = dataBase.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
+Pokemon.belongsToMany(Type, { through: 'PokemonType' });
+Type.belongsToMany(Pokemon, { through: 'PokemonType' });
+
 module.exports = {
-   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+   ...dataBase.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+   conn: dataBase, // para importart la conexión { conn } = require('./db.js');
 };
