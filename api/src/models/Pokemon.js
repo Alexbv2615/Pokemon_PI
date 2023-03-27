@@ -10,6 +10,10 @@ module.exports = (dataBase) => {
       primaryKey: true,
       allowNull: false
     },
+    idPoke: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false
