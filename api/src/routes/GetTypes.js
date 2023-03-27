@@ -4,20 +4,14 @@ const { Type } = require('../db');
 
 const getTypes = async (req, res) => {
     try {
+        const exist = await Type.findAll();
+        if(exist.length > 0) return res.status(200).json(await Type.findAll());
+
         const response = await axios("https://pokeapi.co/api/v2/type");
         const data = response.data.results;
     
         for(let type of data){
-            let exist = await Type.findOne({
-                where: {
-                    name: type.name
-                }
-            });
-            if(!exist){
-                Type.create({ name: type.name});
-            } else{
-                return res.status(200).json(await Type.findAll());
-            };
+            await Type.create({ name: type.name});
         };
         return res.status(200).json(await Type.findAll());
     } catch (error) {
