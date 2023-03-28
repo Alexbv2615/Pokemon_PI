@@ -10,10 +10,6 @@ module.exports = (dataBase) => {
       primaryKey: true,
       allowNull: false
     },
-    idPoke: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true
-    },
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -36,7 +32,6 @@ module.exports = (dataBase) => {
     },
     speed: {
       type: DataTypes.INTEGER,
-      allowNull: false
     },
     height: {
       type: DataTypes.INTEGER,
