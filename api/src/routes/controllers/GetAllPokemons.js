@@ -1,15 +1,23 @@
 const axios = require('axios');
-const { Pokemon, Type } = require('../db');
+const { Pokemon, Type } = require('../../db');
 
 const getAllPokemons = async (req, res) => {
     try {
         //Primero traer a los pokemones de la DB.
-        const pokemonsDB = await Pokemon.findAll({
-            includes: {
-                model: Type, 
-                attributes: ['name'], 
-                through: { attributes: []}
-            }});
+        const pokemonsDB = (await Pokemon.findAll({ 
+            include: {
+              model: Type,
+              attributes: ['name'],
+              through: { attributes: [] }
+            }
+          })).map(pokemon => {
+            const json = pokemon.toJSON();
+            return{
+              ...json,
+              types: json.types.map( type => type.name)
+            }
+          });
+         
         
         let AllPokemons = [...pokemonsDB];
         
