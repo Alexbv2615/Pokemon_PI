@@ -7,7 +7,7 @@ const getAllPokemons = async (req, res) => {
         //primero revisamos si existe un query
         if(name){
           //Buscamos primero en la DB
-          const pokemon = await Pokemon.findOne({
+          const pokemonDb = await Pokemon.findOne({
             where: { name: name.toLowerCase() },
             include: {
               model: Type,
@@ -16,8 +16,8 @@ const getAllPokemons = async (req, res) => {
             }
           });
           // verificamos si se encontro el pokemon, si se encontro devolvemos sino buscamos en la API
-          if (pokemon) {
-            const json = pokemon.toJSON();
+          if (pokemonDb) {
+            const json = pokemonDb.toJSON();
             const resPoke = {
               id: json.id,
               name: json.name,
