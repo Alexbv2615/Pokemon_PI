@@ -1,0 +1,6 @@
+.homeBackground {
+    background-image: url('../../imagenes_pi/fondo_Home.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
