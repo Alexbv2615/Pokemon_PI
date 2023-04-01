@@ -57,7 +57,9 @@ const getAllPokemons = async (req, res) => {
           let AllPokemons = [...pokemonsDB];
       
           //Luego los pokemones de la API
-          const response = await axios('https://pokeapi.co/api/v2/pokemon?limit=60')
+          const response = await axios('https://pokeapi.co/api/v2/pokemon?limit=40', {
+            timeout: 120000
+          });
           const results = response.data.results;
 
           for(let pokemon of results){
