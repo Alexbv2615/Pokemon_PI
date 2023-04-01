@@ -29,9 +29,26 @@ const postPokemon = async (req, res) => {
 
         const typesNewPokemon = await Type.findAll({ where: {name: types || "unknown"} });
 
-        newPokemon.addType(typesNewPokemon);
+        await newPokemon.addType(typesNewPokemon);
 
-        return res.status(200).send('Pokemon creado');
+        const PokemonCreado = await Pokemon.findOne({
+            order: [['createdAt', 'DESC']],
+            include: {
+              model: Type,
+              attributes: ['name'],
+              through: { attributes: [] },
+            },
+        });
+
+        const json = PokemonCreado.toJSON();
+            const resPoke = {
+              id: json.id,
+              name: json.name,
+              image: json.image,
+              types: json.types.map(obj => obj.name)
+            };
+
+        return res.status(200).json(resPoke);
 
     } catch (error) {
         return res.status(400).json({ error: error.message });

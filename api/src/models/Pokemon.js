@@ -39,7 +39,5 @@ module.exports = (dataBase) => {
     weight: {
       type: DataTypes.INTEGER,
     }
-  }, {
-    timestamps: false
   });
 };
