@@ -1,4 +1,6 @@
 import styles from './Landing.module.css';
+import { useDispatch } from 'react-redux';
+import { getTypes } from '../../redux/actions';
 import { Link } from "react-router-dom";
 import { useEffect } from 'react';
 import { pikachu, squirtle, logo } from '../img';
@@ -6,6 +8,12 @@ import { pikachu, squirtle, logo } from '../img';
 
 
 const LandingPage = () => {
+    
+    const dispatch = useDispatch();
+
+    const handleTypes = () => {
+        dispatch(getTypes())
+    }
 
     useEffect(() => {
         document.body.classList.add(styles.landingBackground);
@@ -24,7 +32,7 @@ const LandingPage = () => {
                 <span className={styles.texto}>Bienvenido a la Pokédex!  😸</span>
             </div>
             <Link to='/home'>
-                <button className={styles.button}>👉 Atrapar Pokemones! 👈</button>
+                <button onClick={handleTypes} className={styles.button}>👉 Atrapar Pokemones! 👈</button>
             </Link>
         </div>
         
