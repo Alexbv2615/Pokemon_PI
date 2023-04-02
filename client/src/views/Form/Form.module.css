@@ -1,0 +1,61 @@
+/* .FormBackground {
+    background-image: url('../../imagenes_pi/fondo_Form.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}; */
+
+.form {
+    border: 2px solid red;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    padding: 1rem;
+}
+
+.form input {
+    width: 12rem;
+    margin-bottom: 1.5rem;
+}
+
+.number {
+    width: 4rem !important;
+    margin-bottom: 1.5rem;
+}
+
+.form label {
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+.form fieldset {
+    border: 2px solid green;
+    border-radius: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form fieldset legend {
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+
+.divImg {
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: center;
+
+    width: 8rem;
+    
+    
+}
+
+.divImg input{
+    width: 1rem;
+}
+
+.divImg img {
+    width: 4rem;
+}
