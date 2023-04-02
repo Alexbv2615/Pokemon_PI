@@ -29,7 +29,7 @@ export const getPokemonName = (name) => {
             const response = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
             return dispatch({type: GET_POKEMON_NAME, payload: response.data});
         } catch (error) {
-            return error
+            window.alert(`Pokemon no encontrado 😥 o ${error.message}`)
         }
     }
 }

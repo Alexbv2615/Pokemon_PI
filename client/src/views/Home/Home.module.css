@@ -21,8 +21,10 @@
   margin-top: 2rem;
   gap: 40px;
 
-  
-  
-
   justify-content: space-around;
+}
+
+.loading {
+  width: 25rem;
+  margin-top: 14rem;
 }

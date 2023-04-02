@@ -1,4 +1,5 @@
 import styles from './Card.module.css';
+import imagenes from '../../imagenes_pi/types/types';
 
 
 
@@ -13,7 +14,13 @@ const Card = ({name, image, types}) => {
             <div className={styles.types}>
             {
                 types.map(type => {
-                    return <span key={type}>{type}</span>
+                    let imgType;
+                    for(let img in imagenes){
+                        if(img === type){
+                             imgType = img;
+                        };
+                    }
+                    return <img className={styles.type} key={type} src={imagenes[imgType]} alt={imgType}/>
                 })
             }
             </div>

@@ -49,3 +49,8 @@
     font-family: monospace;
     font-size: 15px;
 }
+
+.type {
+    width: 4rem;
+    margin-bottom: -1rem;
+}
