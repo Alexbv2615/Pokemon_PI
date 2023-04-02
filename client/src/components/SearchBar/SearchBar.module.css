@@ -1,11 +1,14 @@
-.contenedor {
-    padding: 1rem;
+.searchBox{
     
-    border-bottom: 3px solid yellow;
-    box-shadow: 5px 5px 20px yellow;
-    background: linear-gradient(to bottom, #160586, #21d7f7);
-}
-
-.img {
-    width: 4rem;
-}
+   
+ }
+ 
+ .searchBtn {
+   
+ }
+ 
+ .searchTxt{
+   
+ }
+ 
+ 

@@ -1,0 +1,37 @@
+.contenedor {
+    padding: 1rem;
+
+    display: flex;
+    justify-content: space-around;
+    
+    align-items: center;
+    
+    border-bottom: 3px solid yellow;
+    box-shadow: 5px 5px 20px yellow;
+    background: linear-gradient(to bottom, #160586, #21d7f7);
+}
+
+.img {
+    width: 4rem;
+}
+
+.logo {
+    width: 10rem;
+}
+
+.button {
+    padding: 8px;
+    border: 3px solid white;
+    border-radius: 1rem;
+
+    background-color: rgba(0,0,0,.8);
+    color:white;
+    font-family: monospace;
+
+    cursor: pointer;
+    transition: .4s ease;
+}
+
+.button:hover {
+    scale: calc(1.1);
+}

@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Switch, useLocation } from 'react-router-dom';
-import { LandingPage, HomePage, FormPage, DetailPage, SearchBar } from './views/index';
+import { LandingPage, HomePage, FormPage, DetailPage, NavBar } from './views/index';
 
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      {location.pathname === '/' ? <LandingPage/> : <SearchBar/>}
+      {location.pathname === '/' ? <LandingPage/> : <NavBar/>}
       <Switch>
         <Route exact path='/home' component={HomePage} />
         <Route exact path='/createpokemon' component={FormPage} />
