@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getTypes, getPokemons } from '../../redux/actions';
 import { Link } from "react-router-dom";
 import { useEffect } from 'react';
-import { pikachu, squirtle, logo } from '../img';
+import { pikachu, squirtle, logo } from '../../imagenes_pi/img';
 
 
 
