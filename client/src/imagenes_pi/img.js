@@ -3,6 +3,7 @@ import squirtle from '../imagenes_pi/squirtle_landing.png';
 import logo from '../imagenes_pi/logo_Pokemon.png';
 import pokebola from '../imagenes_pi/pokebola.png';
 import loadingImg from '../imagenes_pi/loading.gif';
+import profesor from '../imagenes_pi/profe.png';
 
 
-export { pikachu, squirtle, logo, pokebola, loadingImg }
+export { pikachu, squirtle, logo, pokebola, loadingImg, profesor };
