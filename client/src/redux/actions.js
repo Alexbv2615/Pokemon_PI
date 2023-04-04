@@ -40,7 +40,8 @@ export const postPokemon = (pokemon) => {
             const response = await axios.post('http://localhost:3001/pokemons', pokemon);
             return dispatch({type: POST_POKEMON, payload: response.data});
         } catch (error) {
-            window.alert(error);
+            console.log(error)
+            window.alert(error.response.data);
         }
     }
 }
