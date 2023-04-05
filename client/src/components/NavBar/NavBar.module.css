@@ -21,12 +21,13 @@
 
 .button {
     padding: 8px;
-    border: 3px solid white;
-    border-radius: 1rem;
+    background-color: yellow;
+    border: 3px solid black;
+    border-radius: .6rem;
 
-    background-color: rgba(0,0,0,.8);
-    color:white;
     font-family: monospace;
+    font-size: 15px;
+    font-weight: bold;
 
     cursor: pointer;
     transition: .4s ease;
@@ -34,4 +35,7 @@
 
 .button:hover {
     scale: calc(1.1);
+    border: 3px solid yellow;
+    background-color: black;
+    color: yellow;
 }

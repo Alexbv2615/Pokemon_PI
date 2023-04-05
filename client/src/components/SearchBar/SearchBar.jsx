@@ -15,8 +15,10 @@ const SearchBar = () => {
         const pokemonExist = pokemons.find(pokemon => pokemon.name.toLowerCase() === lowerCaseName);
         if (pokemonExist) {
             window.alert(`El pokemon ${lowerCaseName} ya existe en pantalla.`);
+        } else if(!name){
+            window.alert('No existe el pokemon vacío 🙂')  
         } else {
-            dispatch(getPokemonName(lowerCaseName));    
+            dispatch(getPokemonName(lowerCaseName)); 
         }
     };
 
@@ -25,9 +27,9 @@ const SearchBar = () => {
     }
          
     return (
-        <div className={styles.buscar}>
-            <input placeholder='Search Pokemon' type='search' value={name} onChange={handleChange}/>
-            <button className={styles.btn} onClick={() => onSearch(name)}>🔍</button> 
+        <div className={styles.searchBox}>
+            <input className={styles.searchTxt} placeholder='Search Pokemon' type='search' value={name} onChange={handleChange}/>
+            <button className={styles.searchBtn} onClick={() => onSearch(name)}>🔍</button> 
         </div>
                
     );

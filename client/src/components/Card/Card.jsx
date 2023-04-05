@@ -12,7 +12,7 @@ const Card = ({name, image, types}) => {
             </div>
             <span className={styles.name}>{name}</span>
             <div className={styles.types}>
-            {
+            {types &&
                 types.map(type => {
                     let imgType;
                     for(let img in imagenes){
