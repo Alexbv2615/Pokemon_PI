@@ -10,6 +10,11 @@ const FormPage = () => {
 
     const { types } = useSelector(state => state);
     const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(getTypes());
+        dispatch(getPokemons());
+    }, [dispatch]);
 
     const [pokemon, setPokemon] = useState({
         name: '',
@@ -37,10 +42,6 @@ const FormPage = () => {
 
     const [activeInput, setActiveInput] = useState('');
 
-    useEffect(() => {
-        dispatch(getTypes());
-        dispatch(getPokemons());
-    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

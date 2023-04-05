@@ -1,16 +1,32 @@
 import styles from './Home.module.css';
+import { loadingImg } from '../../imagenes_pi/img';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTypes, getPokemons } from '../../redux/actions';
 import Card from '../../components/Card/Card';
-import { loadingImg } from '../../imagenes_pi/img';
+import Paginado from '../../components/Paginado/Paginado';
 
 const HomePage = () => {
 
     const { pokemons } = useSelector(state => state)
     const dispatch = useDispatch();
 
+    // imagen de cargado
     const [loading, setLoading] = useState(true);
+
+    //Paginado
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pokemonPerPage, setPokemonPerPage] = useState(12);
+
+    const indexOfLastPokemon = currentPage * pokemonPerPage; // 12
+    const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage // 0
+
+    const currentPokemons = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
+
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
 
     useEffect(() => {
         document.body.classList.add(styles.homeBackground);
@@ -20,7 +36,7 @@ const HomePage = () => {
         return () => {
             document.body.classList.remove(styles.homeBackground);
         };
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if (pokemons.length > 0) {
@@ -30,19 +46,21 @@ const HomePage = () => {
 
     return (
         <div className={styles.body}>
-            {loading ? (
-                <img className={styles.loading} src={loadingImg} alt='Cargando...'/>
-            ) : (
-                <div className={styles.container}>
-                {
-                    pokemons.map(({id, name, image, types}) => {
-                        return <Card key={id} name={name} image={image} types={types}/>
-                        })
-                }
-                </div>
-            )}
+            {!loading && <Paginado pokemonPerPage={pokemonPerPage} pokemons={pokemons.length} paginado={paginado} />}
+            <div className={styles.cards}>
+                {loading ? (
+                    <img className={styles.loading} src={loadingImg} alt='Cargando...'/>
+                ) : (
+                    <div className={styles.container}>
+                    {
+                        currentPokemons.map(({id, name, image, types}) => {
+                            return <Card key={id} name={name} image={image} types={types}/>
+                            })
+                    }
+                    </div>
+                )} 
+            </div>
         </div>
-        
     );
 };
 

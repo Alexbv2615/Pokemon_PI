@@ -19,7 +19,7 @@ const LandingPage = () => {
         return () => {
             document.body.classList.remove(styles.landingBackground);
         };
-    }, []);
+    }, [dispatch]);
     
     return (
         <div className={styles.container}>
