@@ -60,6 +60,13 @@ export const reducer = (state = initialState, action) => {
                 pokemons: filterByOrigin
             };
 
+        case FILTER_TYPE:
+            const pokeType = state.allPokemons;
+            const filterByTypes = pokeType.filter(poke => { return action.payload.every(tipo => poke.types.includes(tipo))});
+            return {
+                ...state,
+                pokemons: filterByTypes
+            };
 
         default:
             return {...state};

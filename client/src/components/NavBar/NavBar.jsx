@@ -13,6 +13,7 @@ const NavBar = () => {
     const dispatch = useDispatch();
 
     const [filterActive, setFilterActive] = useState(false);
+    const [typesFilter, setTypesFilter] = useState([]);
 
     const handlerActiveFilter = () => {
         filterActive ? setFilterActive(false) : setFilterActive(true);
@@ -29,6 +30,22 @@ const NavBar = () => {
             dispatch(filterByOrigin(value));
         };
     };
+
+    const handlerFilterTypes = (e) => {
+        const {value, checked} = e.target;
+        if(checked){
+            setTypesFilter([...typesFilter, value]);
+            dispatch(filterByTypes([...typesFilter, value]));
+        } else{
+            setTypesFilter(typesFilter.filter(type => type !== value));
+            dispatch(filterByTypes(typesFilter.filter(type => type !== value)));
+        };
+    }
+
+    // Para ver el estado typesFilter de forma asyncronica:
+    // useEffect(() => {
+    //     console.log(typesFilter)
+    // }, [typesFilter]);
 
     
 
@@ -73,8 +90,8 @@ const NavBar = () => {
                         types.map(type => {
                             return(
                                 <div className={styles.divImg} key={type.id}>
-                                    <input type='checkbox' id={type.name} value={type.name} />
-                                    <img className={styles.imgType} src={imagenes[type.name]}/>
+                                    <input type='checkbox' id={type.name} value={type.name} onChange={handlerFilterTypes} />
+                                    <img className={styles.imgType} src={imagenes[type.name]} alt={type.name}/>
                                 </div>
                             )
                         })
