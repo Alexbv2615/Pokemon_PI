@@ -1,23 +1,83 @@
 import styles from './NavBar.module.css';
 import { pokebola, logo } from '../../imagenes_pi/img';
-import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
-
+import imagenes from '../../imagenes_pi/types/types';
+import { orderByName, orderByAttack } from '../../redux/actions';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const NavBar = () => {
 
+    const { types } = useSelector(state => state);
+    const dispatch = useDispatch();
+
+    const [filterActive, setFilterActive] = useState(false);
+
+    const handlerActiveFilter = () => {
+        filterActive ? setFilterActive(false) : setFilterActive(true);
+    };
+
+    const handlerOrder = (e) => {
+        const { value, name } = e.target;
+
+        if(name === 'OrderByName'){
+            dispatch(orderByName(value));
+        } else if(name === 'OrderByAttack'){
+            dispatch(orderByAttack(value));
+        };
+    };
+
     return (
         <div className={styles.contenedor}>
-            <img className={styles.img} src={pokebola}/>
-            <Link to='/home'>
-                <button className={styles.button}>Home</button>
-            </Link>
-            <Link to='/createpokemon'>
-                <button className={styles.button}>Create Pokemon!</button>
-            </Link>
-            <img className={styles.logo} src={logo} />
-            <SearchBar/>
+            <div className={styles.navTop}>
+                <img className={styles.img} src={pokebola} alt={pokebola}/>
+                <Link to='/home'>
+                    <button className={styles.button}>Home</button>
+                </Link>
 
+                <select name="OrderByName" id="OrderByName" defaultValue="Order by name" onChange={handlerOrder}>
+                    <option disabled>Order by name</option>
+                    <option value="ascendente">Ascendente</option>
+                    <option value="descendente">Descendente</option>
+                </select>
+
+                <select name="OrderByAttack" id="OrderByAttack" defaultValue="Order by attack" onChange={handlerOrder}>
+                    <option disabled>Order by attack</option>
+                    <option value="ascendente">ascendente</option>
+                    <option value="descendente">descendente</option>
+                </select>
+
+                <select name="FilterByOrigin" id="FilterByOrigin" defaultValue="Filter by origin">
+                    <option disabled>Filter by origin</option>
+                    <option value="all">All</option>
+                    <option value="created">created</option>
+                    <option value="api">api</option>
+                </select>
+
+                <button onClick={handlerActiveFilter}>Filter by types 🔽</button>
+
+                <img className={styles.logo} src={logo} alt={logo}/>
+                <Link to='/createpokemon'>
+                    <button className={styles.button}>Create Pokemon!</button>
+                </Link>
+                <SearchBar/>
+            </div>
+                {   filterActive && 
+                    <fieldset className={styles.filterTypes}>
+                    {
+                        types.map(type => {
+                            return(
+                                <div className={styles.divImg} key={type.id}>
+                                    <input type='checkbox' id={type.name} value={type.name} />
+                                    <img className={styles.imgType} src={imagenes[type.name]}/>
+                                </div>
+                            )
+                        })
+                    }
+                    </fieldset>
+                }
+            
         </div>
         
 

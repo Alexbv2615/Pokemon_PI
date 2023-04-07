@@ -1,7 +1,8 @@
-import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON } from './actions_types'; 
+import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON, ORDER_NAME, ORDER_ATTACK } from './actions_types'; 
 
 const initialState = {
     pokemons: [],
+    allPokemons: [],
     types: []
 };
 
@@ -11,8 +12,9 @@ export const reducer = (state = initialState, action) => {
         case GET_POKEMONS:
             return {
                 ...state,
-                pokemons: state.pokemons.length > 0 ? [...state.pokemons] : action.payload
-            }
+                pokemons: state.pokemons.length > 0 ? [...state.pokemons] : action.payload,
+                allPokemons: state.allPokemons.length > 0 ? [...state.allPokemons] : action.payload,
+            };
 
         case GET_TYPES:
             return {
@@ -23,14 +25,32 @@ export const reducer = (state = initialState, action) => {
         case GET_POKEMON_NAME:
             return {
                 ...state,
-                pokemons: [action.payload, ...state.pokemons]
-            }
+                pokemons: [action.payload, ...state.pokemons],
+                allPokemons: [action.payload, ...state.pokemons],
+            };
 
         case POST_POKEMON:
             return {
                 ...state,
-                pokemons: [action.payload, ...state.pokemons]
-            }
+                pokemons: [action.payload, ...state.pokemons],
+                allPokemons: [action.payload, ...state.pokemons]
+            };
+
+        case ORDER_NAME:
+            const pokeName = state.allPokemons;
+            const orderByName = action.payload === 'ascendente' ? pokeName.sort((a,b) => a.name.localeCompare(b.name)) : pokeName.sort((a,b) => b.name.localeCompare(a.name));
+            return {
+                ...state,
+                pokemons: orderByName
+            };
+
+        case ORDER_ATTACK:
+            const pokeAttack = state.allPokemons;
+            const orderByAttack = action.payload === 'ascendente' ? pokeAttack.sort((a,b) => a.attack - b.attack) : pokeAttack.sort((a,b) => b.attack - a.attack)
+            return {
+                ...state,
+                pokemons: orderByAttack
+            };
 
         default:
             return {...state};

@@ -1,4 +1,4 @@
-import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON } from "./actions_types";
+import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON, ORDER_NAME, ORDER_ATTACK } from "./actions_types";
 import axios from 'axios';
 
 export const getTypes = () => {
@@ -29,10 +29,10 @@ export const getPokemonName = (name) => {
             const response = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
             return dispatch({type: GET_POKEMON_NAME, payload: response.data});
         } catch (error) {
-            window.alert(`Pokemon no encontrado 😥 o ${error.message}`)
-        }
-    }
-}
+            window.alert(`${error.response.data.error} 😥`)
+        };
+    };
+};
 
 export const postPokemon = (pokemon) => {
     return async function(dispatch){
@@ -42,6 +42,14 @@ export const postPokemon = (pokemon) => {
         } catch (error) {
             console.log(error)
             window.alert(error.response.data);
-        }
-    }
-}
+        };
+    };
+};
+
+export const orderByName = (payload) => {
+    return {type: ORDER_NAME, payload};
+};
+
+export const orderByAttack = (payload) => {
+    return {type: ORDER_ATTACK, payload};
+};
