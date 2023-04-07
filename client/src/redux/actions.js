@@ -1,4 +1,4 @@
-import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON, ORDER_NAME, ORDER_ATTACK } from "./actions_types";
+import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON, ORDER_NAME, ORDER_ATTACK, FILTER_ORIGIN, FILTER_TYPE } from "./actions_types";
 import axios from 'axios';
 
 export const getTypes = () => {
@@ -52,4 +52,12 @@ export const orderByName = (payload) => {
 
 export const orderByAttack = (payload) => {
     return {type: ORDER_ATTACK, payload};
+};
+
+export const filterByOrigin = (payload) => {
+    return {type: FILTER_ORIGIN, payload};
+};
+
+export const filterByTypes = (payload) => {
+    return {type: FILTER_TYPE, payload};
 };

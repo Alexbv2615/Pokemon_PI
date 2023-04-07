@@ -1,4 +1,4 @@
-import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON, ORDER_NAME, ORDER_ATTACK } from './actions_types'; 
+import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON, ORDER_NAME, ORDER_ATTACK, FILTER_ORIGIN, FILTER_TYPE } from './actions_types'; 
 
 const initialState = {
     pokemons: [],
@@ -51,6 +51,15 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 pokemons: orderByAttack
             };
+
+        case FILTER_ORIGIN:
+            const pokeOrigin = state.allPokemons;
+            const filterByOrigin = action.payload === 'all' ? pokeOrigin : action.payload === 'api' ? pokeOrigin.filter(poke => Number(poke.id) > 0) : pokeOrigin.filter(poke => !(Number(poke.id) > 0)) 
+            return {
+                ...state,
+                pokemons: filterByOrigin
+            };
+
 
         default:
             return {...state};

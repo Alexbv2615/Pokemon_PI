@@ -5,3 +5,6 @@ export const POST_POKEMON = 'POST_POKEMON';
 //ordenamiento
 export const ORDER_NAME = 'ORDER_NAME';
 export const ORDER_ATTACK = 'ORDER_ATTACK';
+//filtrado
+export const FILTER_ORIGIN = 'FILTER_ORIGIN';
+export const FILTER_TYPE = 'FILTER_TYPE';
