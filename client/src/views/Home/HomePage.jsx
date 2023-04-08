@@ -66,6 +66,7 @@ const HomePage = () => {
                     </div>
                 )} 
             </div>
+            <span className={styles.created}>Created by: Alexbv2615</span>
         </div>
     );
 };

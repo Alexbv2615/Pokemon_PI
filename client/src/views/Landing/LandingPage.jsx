@@ -22,18 +22,20 @@ const LandingPage = () => {
     }, [dispatch]);
     
     return (
+        <>
         <div className={styles.container}>
-            <img className={styles.imgLogo} src={logo} />
-            <img className={styles.imgSquir} src={squirtle} />
-            <img className={styles.imgPika} src={pikachu} />
+            <img className={styles.imgLogo} src={logo} alt={logo} />
+            <img className={styles.imgSquir} src={squirtle} alt={squirtle} />
+            <img className={styles.imgPika} src={pikachu} alt={pikachu}/>
             <div className={styles.welcome}>
                 <span className={styles.texto}>Bienvenido a la Pokédex!  😸</span>
             </div>
             <Link to='/home'>
                 <button className={styles.button}>👉 Atrapar Pokemones! 👈</button>
-            </Link>
+           </Link>   
         </div>
-        
+        <span className={styles.created}>Created by: Alexbv2615</span>
+        </>
     )
 };
 

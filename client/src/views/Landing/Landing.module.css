@@ -127,3 +127,16 @@
     from { width: 0 }
     to { width: 100% }
   }    
+
+
+  .created {
+    /* background-color: rgba(0,0,0,.5); */
+    color: white;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+   
+  }
