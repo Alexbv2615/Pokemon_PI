@@ -54,3 +54,8 @@
   width: 25rem;
   margin-top: 14rem;
 }
+
+.link{
+  text-decoration: none;
+  color: black;
+}

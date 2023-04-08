@@ -1,4 +1,4 @@
-import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON, ORDER_NAME, ORDER_ATTACK, FILTER_ORIGIN, FILTER_TYPE } from "./actions_types";
+import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON, ORDER_NAME, ORDER_ATTACK, FILTER_ORIGIN, FILTER_TYPE, GET_DETAIL, SET_DETAIL } from "./actions_types";
 import axios from 'axios';
 
 export const getTypes = () => {
@@ -40,11 +40,25 @@ export const postPokemon = (pokemon) => {
             const response = await axios.post('http://localhost:3001/pokemons', pokemon);
             return dispatch({type: POST_POKEMON, payload: response.data});
         } catch (error) {
-            console.log(error)
             window.alert(error.response.data);
         };
     };
 };
+
+export const getDetailPokemon = (id) => {
+    return async function(dispatch){
+        try {
+            const response = await axios.get(`http://localhost:3001/pokemons/${id}`);
+            return dispatch({type: GET_DETAIL, payload: response.data});
+        } catch (error) {
+            window.alert(error.response.data);
+        };
+    };
+};
+
+export const setDetailPokemon = () => {
+    return {type: SET_DETAIL}
+}
 
 export const orderByName = (payload) => {
     return {type: ORDER_NAME, payload};

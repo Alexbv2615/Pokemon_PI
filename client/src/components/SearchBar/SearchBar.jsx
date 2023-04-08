@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { getPokemonName } from '../../redux/actions';
 import styles from './SearchBar.module.css'
 

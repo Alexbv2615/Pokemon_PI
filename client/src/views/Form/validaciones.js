@@ -25,15 +25,15 @@ const validate = (dataEdit) => {
         if(!value){
             errors[name] = `El valor de ${name} es requerido`;
         };
-        if(value > 999 || value < 0){
+        if(value > 999 || value <= 0){
             errors[name] = `El valor de ${name} debe estar entre 0 y 999`;
         };
     } else if(name === 'height'){
-        if(value > 10 || value < 0){
+        if(value > 10 || value <= 0){
             errors[name] = `El valor de ${name} debe estar entre 0 y 10`;
         }
     } else if(name === 'weight'){
-        if(value > 500 || value < 0){
+        if(value > 500 || value <= 0){
             errors[name] = `El valor de ${name} debe estar entre 0 y 500`;
         };
     };

@@ -3,8 +3,10 @@ import { loadingImg } from '../../imagenes_pi/img';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTypes, getPokemons } from '../../redux/actions';
+import { Link } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 import Paginado from '../../components/Paginado/Paginado';
+
 
 const HomePage = () => {
 
@@ -16,7 +18,7 @@ const HomePage = () => {
 
     //Paginado
     const [currentPage, setCurrentPage] = useState(1);
-    const [pokemonPerPage, setPokemonPerPage] = useState(12);
+    const [pokemonPerPage] = useState(12);
 
     const indexOfLastPokemon = currentPage * pokemonPerPage; // 12
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage // 0
@@ -54,7 +56,11 @@ const HomePage = () => {
                     <div className={styles.container}>
                     {
                         currentPokemons.map(({id, name, image, types}) => {
-                            return <Card key={id} name={name} image={image} types={types}/>
+                            return (
+                                <Link to={`/detail/${id}`} className={styles.link} key={id}>
+                                    <Card key={id} name={name} image={image} types={types}/>
+                                </Link>
+                            )
                             })
                     }
                     </div>
