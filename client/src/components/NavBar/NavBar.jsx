@@ -57,26 +57,26 @@ const NavBar = () => {
                     <button className={styles.button}>Home</button>
                 </Link>
 
-                <select name="OrderByName" id="OrderByName" defaultValue="Order by name" onChange={handlerOrder_Filter}>
+                <select className={styles.order} name="OrderByName" id="OrderByName" defaultValue="Order by name" onChange={handlerOrder_Filter}>
                     <option disabled>Order by name</option>
                     <option value="ascendente">Ascendente</option>
                     <option value="descendente">Descendente</option>
                 </select>
 
-                <select name="OrderByAttack" id="OrderByAttack" defaultValue="Order by attack" onChange={handlerOrder_Filter}>
+                <select className={styles.order} name="OrderByAttack" id="OrderByAttack" defaultValue="Order by attack" onChange={handlerOrder_Filter}>
                     <option disabled>Order by attack</option>
                     <option value="ascendente">ascendente</option>
                     <option value="descendente">descendente</option>
                 </select>
 
-                <select name="FilterByOrigin" id="FilterByOrigin" defaultValue="Filter by origin" onChange={handlerOrder_Filter}>
+                <select className={styles.filter} name="FilterByOrigin" id="FilterByOrigin" defaultValue="Filter by origin" onChange={handlerOrder_Filter}>
                     <option disabled>Filter by origin</option>
                     <option value="all">All</option>
                     <option value="created">Created</option>
                     <option value="api">Api</option>
                 </select>
 
-                <button onClick={handlerActiveFilter}>Filter by types 🔽</button>
+                <button className={styles.filter} onClick={handlerActiveFilter}>Filter by types 🔽</button>
 
                 <img className={styles.logo} src={logo} alt={logo}/>
                 <Link to='/createpokemon'>

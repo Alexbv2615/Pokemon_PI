@@ -72,3 +72,33 @@
     background-color: black;
     color: yellow;
 }
+
+.order{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: .2rem;
+
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 12px;
+
+    background-color:aquamarine;
+    color: darkblue;
+};
+
+.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx{
+    border: none;
+}
+
+.filter{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: .2rem;
+
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 12px;
+
+    background-color:aquamarine;
+    color: darkblue;
+};
