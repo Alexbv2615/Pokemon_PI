@@ -48,7 +48,7 @@ const HomePage = () => {
 
     return (
         <div className={styles.body}>
-            {!loading && <Paginado pokemonPerPage={pokemonPerPage} pokemons={pokemons.length} paginado={paginado} />}
+            {!loading && <Paginado pokemonPerPage={pokemonPerPage} pokemons={pokemons.length} paginado={paginado} currentPage={currentPage} setCurrentPage={setCurrentPage}/>}
             <div className={styles.cards}>
                 {loading ? (
                     <img className={styles.loading} src={loadingImg} alt='Cargando...'/>
