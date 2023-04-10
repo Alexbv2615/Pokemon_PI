@@ -1,25 +1,24 @@
 .searchBox{
-    border: 2px solid black;
-    border-radius: 1rem;
-    background-color: white;
     display: flex;
     padding: 4px;
    
  }
  
  .searchBtn {
-   border: none;
-  background: none; 
+   border: 2px solid black;
+  background-color: beige; 
+  border-radius: 5px;
   cursor: pointer;
 }
  
  .searchTxt{
-    background: none;
-    border: none;
+    background-color: azure;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 5px;
  }
 
  .searchTxt:focus{
     outline: none;
  }
- 
  
