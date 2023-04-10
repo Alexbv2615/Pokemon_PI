@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getTypes = () => {
     return async function(dispatch){
         try {
-            const response = await axios.get('http://localhost:3001/types')
+            const response = await axios.get('/types')
             return dispatch({type: GET_TYPES, payload: response.data});
         } catch (error) {
             return error;
@@ -15,7 +15,7 @@ export const getTypes = () => {
 export const getPokemons = () => {
     return async function(dispatch){
         try {
-            const response = await axios.get('http://localhost:3001/pokemons')
+            const response = await axios.get('/pokemons')
             return dispatch({type: GET_POKEMONS, payload: response.data});
         } catch (error) {
             return error;
@@ -26,7 +26,7 @@ export const getPokemons = () => {
 export const getPokemonName = (name) => {
     return async function(dispatch){
         try {
-            const response = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
+            const response = await axios.get(`/pokemons?name=${name}`);
             return dispatch({type: GET_POKEMON_NAME, payload: response.data});
         } catch (error) {
             window.alert(`${error.response.data.error} 😥`)
@@ -37,7 +37,7 @@ export const getPokemonName = (name) => {
 export const postPokemon = (pokemon) => {
     return async function(dispatch){
         try {
-            const response = await axios.post('http://localhost:3001/pokemons', pokemon);
+            const response = await axios.post('/pokemons', pokemon);
             return dispatch({type: POST_POKEMON, payload: response.data});
         } catch (error) {
             window.alert(error.response.data);
@@ -48,7 +48,7 @@ export const postPokemon = (pokemon) => {
 export const getDetailPokemon = (id) => {
     return async function(dispatch){
         try {
-            const response = await axios.get(`http://localhost:3001/pokemons/${id}`);
+            const response = await axios.get(`/pokemons/${id}`);
             return dispatch({type: GET_DETAIL, payload: response.data});
         } catch (error) {
             window.alert(error.response.data);
