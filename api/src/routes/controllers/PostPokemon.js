@@ -1,18 +1,19 @@
 const { Pokemon, Type } = require('../../db');
+const axios = require('axios');
 
 const postPokemon = async (req, res) => {
     try {
         const { name, image, hp, attack, defense, speed, height, weight, types} = req.body;
 
         //primero verifico que no falten datos principales
-        if(!name || !image || !hp || ! attack || !defense) return res.status(400).send('Falta rellenar datos principales');
+        if(!name || !image || !hp || ! attack || !defense) return res.status(400).send('Falta rellenar datos principales 😥');
 
         //ahora verifico si ya existe ese pokemon en la DB
-        const existPokemon = await Pokemon.findOne({
+        const existPokemonDb = await Pokemon.findOne({
             where: { name: name.toLowerCase() }
         });
 
-        if(existPokemon) return res.status(400).send(`ya existe el pokemon: ${name}`);
+        if(existPokemonDb) return res.status(400).send(`ya existe el pokemon: ${name} 😓`);
 
         //si no existe, lo creo.
         const newPokemon = await Pokemon.create({
@@ -24,10 +25,10 @@ const postPokemon = async (req, res) => {
             speed,
             height,
             weight,
-            types: types || "unknown"
+            types: types.length > 0 ? types : "unknown"
         });
 
-        const typesNewPokemon = await Type.findAll({ where: {name: types || "unknown"} });
+        const typesNewPokemon = await Type.findAll({ where: {name: types.length > 0 ? types : "unknown"} });
 
         await newPokemon.addType(typesNewPokemon);
 
@@ -44,6 +45,7 @@ const postPokemon = async (req, res) => {
             const resPoke = {
               id: json.id,
               name: json.name,
+              attack: json.attack,
               image: json.image,
               types: json.types.map(obj => obj.name)
             };

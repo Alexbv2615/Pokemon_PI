@@ -21,6 +21,7 @@ const getAllPokemons = async (req, res) => {
             const resPoke = {
               id: json.id,
               name: json.name,
+              attack: json.attack,
               image: json.image,
               types: json.types.map(obj => obj.name)
             };
@@ -28,11 +29,12 @@ const getAllPokemons = async (req, res) => {
           } else {
             const response = await axios(`https://pokeapi.co/api/v2/pokemon/${name}`);
             const data = response.data
-
+            
             const PokemonApi = {
               id: data.id,
               name: data.name,
-              image: data.sprites.other["official-artwork"].front_default,
+              attack: data.stats[1].base_stat,
+              image: data.sprites.other.dream_world.front_default,
               types: data.types.map(obj => obj.type.name)
             };
             return res.status(200).json(PokemonApi);
@@ -57,7 +59,7 @@ const getAllPokemons = async (req, res) => {
           let AllPokemons = [...pokemonsDB];
       
           //Luego los pokemones de la API
-          const response = await axios('https://pokeapi.co/api/v2/pokemon?limit=40', {
+          const response = await axios('https://pokeapi.co/api/v2/pokemon?limit=30', {
             timeout: 120000
           });
           const results = response.data.results;
@@ -69,6 +71,7 @@ const getAllPokemons = async (req, res) => {
               AllPokemons.push({
                   id: data.id,
                   name: data.name,
+                  attack: data.stats[1].base_stat,
                   image: data.sprites.other.dream_world.front_default,
                   types: data.types.map(obj => obj.type.name)
               });
@@ -78,7 +81,7 @@ const getAllPokemons = async (req, res) => {
         };
         
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        res.status(400).json({ error: error.message})
     };
 };
 
