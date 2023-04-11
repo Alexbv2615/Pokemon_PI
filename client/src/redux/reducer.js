@@ -50,7 +50,7 @@ export const reducer = (state = initialState, action) => {
             };
 
         case ORDER_NAME:
-            const pokeName = state.allPokemons;
+            const pokeName = state.pokemons;
             const orderByName = action.payload === 'ascendente' ? pokeName.sort((a,b) => a.name.localeCompare(b.name)) : pokeName.sort((a,b) => b.name.localeCompare(a.name));
             return {
                 ...state,
@@ -58,7 +58,7 @@ export const reducer = (state = initialState, action) => {
             };
 
         case ORDER_ATTACK:
-            const pokeAttack = state.allPokemons;
+            const pokeAttack = state.pokemons;
             const orderByAttack = action.payload === 'ascendente' ? pokeAttack.sort((a,b) => a.attack - b.attack) : pokeAttack.sort((a,b) => b.attack - a.attack)
             return {
                 ...state,
