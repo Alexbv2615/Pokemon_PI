@@ -8,6 +8,10 @@ const Paginado = ({pokemonPerPage, pokemons, paginado, currentPage, setCurrentPa
         pageNumbers.push(i);
     };
 
+    if(!pageNumbers.includes(currentPage)){
+        setCurrentPage(1);
+    };
+
     const handlePrevClick = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
