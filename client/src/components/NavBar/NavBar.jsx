@@ -16,7 +16,13 @@ const NavBar = () => {
     const [typesFilter, setTypesFilter] = useState([]);
 
     const handlerActiveFilter = () => {
-        filterActive ? setFilterActive(false) : setFilterActive(true);
+        if(filterActive){
+            setFilterActive(false);
+            setTypesFilter([]);
+            dispatch(filterByTypes([]));
+        }else{
+            setFilterActive(true);   
+        }
     };
 
     const handlerOrder_Filter = (e) => {
