@@ -1,4 +1,4 @@
-import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON, ORDER_NAME, ORDER_ATTACK, FILTER_ORIGIN, FILTER_TYPE, GET_DETAIL, SET_DETAIL } from './actions_types'; 
+import { GET_TYPES, GET_POKEMONS, GET_POKEMON_NAME, POST_POKEMON, ORDER_NAME, ORDER_ATTACK, FILTER_ORIGIN_AND_TYPE, GET_DETAIL, SET_DETAIL } from './actions_types'; 
 
 const initialState = {
     pokemons: [],
@@ -65,23 +65,22 @@ export const reducer = (state = initialState, action) => {
                 pokemons: orderByAttack
             };
 
-        case FILTER_ORIGIN:
-            const pokeOrigin = state.allPokemons;
-            const filterByOrigin = action.payload === 'all' ? pokeOrigin : action.payload === 'api' ? pokeOrigin.filter(poke => Number(poke.id) > 0) : pokeOrigin.filter(poke => !(Number(poke.id) > 0)) 
+        case FILTER_ORIGIN_AND_TYPE:
+            const pokeOriginAndType = state.allPokemons;
+            const filterByOriginAndType = pokeOriginAndType.filter(poke => {
+                return action.payload.types.every(tipo => poke.types.includes(tipo))
+                    && (action.payload.origin === 'all'
+                        || (action.payload.origin === 'api' && Number(poke.id) > 0)
+                        || (action.payload.origin === 'created' && !(Number(poke.id) > 0)));
+            });
+            
             return {
                 ...state,
-                pokemons: filterByOrigin
-            };
-
-        case FILTER_TYPE:
-            const pokeType = state.allPokemons;
-            const filterByTypes = pokeType.filter(poke => { return action.payload.every(tipo => poke.types.includes(tipo))});
-            return {
-                ...state,
-                pokemons: filterByTypes
+                pokemons: filterByOriginAndType
             };
 
         default:
             return {...state};
     };
 };
+

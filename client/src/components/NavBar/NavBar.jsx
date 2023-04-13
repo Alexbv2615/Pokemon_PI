@@ -2,7 +2,7 @@ import styles from './NavBar.module.css';
 import { pokebola, logo } from '../../imagenes_pi/img';
 import SearchBar from '../SearchBar/SearchBar';
 import imagenes from '../../imagenes_pi/types/types';
-import { orderByName, orderByAttack, filterByOrigin, filterByTypes } from '../../redux/actions';
+import { orderByName, orderByAttack, filterOrigin_and_Type} from '../../redux/actions';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -13,13 +13,16 @@ const NavBar = () => {
     const dispatch = useDispatch();
 
     const [filterActive, setFilterActive] = useState(false);
-    const [typesFilter, setTypesFilter] = useState([]);
+    const [filters, setFilters] = useState({
+        origin: 'all',
+        types: []
+    });
 
     const handlerActiveFilter = () => {
         if(filterActive){
             setFilterActive(false);
-            setTypesFilter([]);
-            dispatch(filterByTypes([]));
+            setFilters({...filters, types: []});
+            dispatch(filterOrigin_and_Type({...filters, types: []}));
         }else{
             setFilterActive(true);   
         }
@@ -33,25 +36,26 @@ const NavBar = () => {
         } else if(name === 'OrderByAttack'){
             dispatch(orderByAttack(value));
         } else if(name === 'FilterByOrigin'){
-            dispatch(filterByOrigin(value));
+            setFilters({...filters, origin: value});
+            dispatch(filterOrigin_and_Type({...filters, origin: value}));
         };
     };
 
     const handlerFilterTypes = (e) => {
         const {value, checked} = e.target;
         if(checked){
-            setTypesFilter([...typesFilter, value]);
-            dispatch(filterByTypes([...typesFilter, value]));
+            setFilters({...filters, types: [...filters.types, value]});
+            dispatch(filterOrigin_and_Type({...filters, types: [...filters.types, value]}));
         } else{
-            setTypesFilter(typesFilter.filter(type => type !== value));
-            dispatch(filterByTypes(typesFilter.filter(type => type !== value)));
+            setFilters({...filters, types: filters.types.filter(type => type !== value)});
+            dispatch(filterOrigin_and_Type({...filters, types: filters.types.filter(type => type !== value)}));
         };
     }
 
-    // Para ver el estado typesFilter de forma asyncronica:
+    // Para ver el estado filters de forma asyncronica:
     // useEffect(() => {
-    //     console.log(typesFilter)
-    // }, [typesFilter]);
+    //     console.log(filters)
+    // }, [filters]);
 
     
 

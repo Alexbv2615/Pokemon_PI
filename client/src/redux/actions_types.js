@@ -6,8 +6,7 @@ export const POST_POKEMON = 'POST_POKEMON';
 export const ORDER_NAME = 'ORDER_NAME';
 export const ORDER_ATTACK = 'ORDER_ATTACK';
 //filtrado
-export const FILTER_ORIGIN = 'FILTER_ORIGIN';
-export const FILTER_TYPE = 'FILTER_TYPE';
+export const FILTER_ORIGIN_AND_TYPE = 'FILTER_ORIGIN_AND_TYPE';
 //Detail
 export const GET_DETAIL = 'GET_DETAIL';
 export const SET_DETAIL = 'SET_DETAIL';
