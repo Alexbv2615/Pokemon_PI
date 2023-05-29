@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { LandingPage, HomePage, FormPage, DetailPage, NavBar } from './views/index';
 import axios from 'axios';
-axios.defaults.baseURL = 'https://pokemonpi-production.up.railway.app/';
+axios.defaults.baseURL = 'https://servidor-pokemonapp.onrender.com';
 
 function App() {
 
