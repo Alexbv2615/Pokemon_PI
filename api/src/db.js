@@ -2,13 +2,18 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT, DB_DEPLOY} = process.env;
 
 const dataBase = new Sequelize(
-   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
+   DB_DEPLOY,
    {
       logging: false, // set to console.log to see the raw SQL queries
       native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+      dialectOptions: {
+         ssl: {
+            require: true,
+         },
+      },
    }
 );
 const basename = path.basename(__filename); // se lee el nombre de archivo actual y se guarda en la variable "basename"
